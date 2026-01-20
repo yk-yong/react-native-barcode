@@ -2,13 +2,12 @@
 
 #import <CoreImage/CoreImage.h>
 #import <React/RCTConversions.h>
+#import <React/RCTUtils.h>
 
 #import <react/renderer/components/ReactNativeBarcodeViewSpec/ComponentDescriptors.h>
 #import <react/renderer/components/ReactNativeBarcodeViewSpec/EventEmitters.h>
 #import <react/renderer/components/ReactNativeBarcodeViewSpec/Props.h>
 #import <react/renderer/components/ReactNativeBarcodeViewSpec/RCTComponentViewHelpers.h>
-
-#import "RCTFabricComponentsPlugins.h"
 
 using namespace facebook::react;
 
@@ -77,16 +76,16 @@ using namespace facebook::react;
 }
 
 - (void)renderBarcodeWithProps:(ReactNativeBarcodeViewProps const &)props {
-  NSString *value = RCTNSStringFromString(props.value);
+  NSString *value = props.value.empty()
+                        ? nil
+                        : [NSString stringWithUTF8String:props.value.c_str()];
   if (value.length == 0) {
     _imageView.image = nil;
     return;
   }
 
-  NSString *format = RCTNSStringFromString(props.format);
-  if (format.length == 0) {
-    format = @"qr";
-  }
+  std::string formatStr = toString(props.format);
+  NSString *format = [NSString stringWithUTF8String:formatStr.c_str()];
 
   UIColor *foregroundColor =
       props.foregroundColor ? RCTUIColorFromSharedColor(props.foregroundColor)
@@ -199,3 +198,7 @@ using namespace facebook::react;
 }
 
 @end
+
+Class<RCTComponentViewProtocol> ReactNativeBarcodeViewCls(void) {
+  return ReactNativeBarcodeView.class;
+}
