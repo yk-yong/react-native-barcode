@@ -47,14 +47,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yk-yong/yk-yong-react-native-barcode.git"
+    "url": "git+https://github.com/yk-yong/react-native-barcode.git"
   },
   "author": "John Yk <yikok.yong@gmail.com> (https://github.com/yk-yong)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yk-yong/yk-yong-react-native-barcode/issues"
+    "url": "https://github.com/yk-yong/react-native-barcode/issues"
   },
-  "homepage": "https://github.com/yk-yong/yk-yong-react-native-barcode#readme",
+  "homepage": "https://github.com/yk-yong/react-native-barcode#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
